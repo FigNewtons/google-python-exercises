@@ -47,6 +47,29 @@ import sys
 
 ###
 
+def build_dict(filename):
+  text = open(filename).read().split()
+  dictionary = dict()
+
+  for word in text:
+    w = word.lower()
+    if w in dictionary:
+      dictionary[w] += 1
+    else:
+      dictionary[w] = 1
+  return dictionary
+
+def print_words(filename):
+  dictionary = build_dict(filename)
+  for word in sorted(dictionary.keys()):
+      print word + ' ' + str(dictionary[word])
+
+def print_top(filename):
+  d = build_dict(filename)
+  for word in sorted(d.keys(), key = lambda w: d[w], reverse = True)[:20]:
+    print word + ' ' + str(d[word])
+
+
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main():
